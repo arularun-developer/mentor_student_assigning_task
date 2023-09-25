@@ -17,7 +17,7 @@ mongoose
     .catch((err) => console.log("Could not connect to MongoDB", err));
 //inital start with server response//
 app.get("/", (req, res) => {
-    res.status(200).send("Hi, hello!! welcome postman");
+    res.status(200).send("Hi, hello!! welcome ");
 });
 
 //create to mentor
