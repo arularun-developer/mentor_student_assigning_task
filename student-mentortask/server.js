@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyparser = require("body-parser");
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -91,7 +90,19 @@ app.get("/mentor/:mentorId/students", async (req, res) => {
       res.status(400).send(error);
     }
   });
+ app.get("/student/:studentid/pMentor",async (req,res)=>{
+  try{
+         const student = await Student.findById(req.params.studentid).populate("pMentor");
+         if(!student.pMentor){
+          return res.status(404).json({error:"no previous mentor available"})
+         }else{
+          res.send(student.pMentor);
+         }
+  }catch(error){
+    res.status(400).send(error)
 
+  }
+ })
 app.listen(PORT, () => {
     console.log("successfully running on the port", PORT)
 })
